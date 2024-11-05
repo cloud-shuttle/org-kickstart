@@ -66,8 +66,18 @@ provider "aws" {
 
 }
 
+terraform {
+  backend "s3" {
+    bucket         = "org-kickstarter-863518459022"
+    key            = "terraform.tfstate"
+    region         = "ap-southeast-2"
+    dynamodb_table = "org-kickstarter-863518459022"
+    encrypt        = true
+  }
+}
+
 provider "aws" {
-  alias = "payer-ap-southeast-2"
+  alias = "sydney"
   region = "ap-southeast-2"
   default_tags {
     tags = local.default_tags

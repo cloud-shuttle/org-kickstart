@@ -22,21 +22,21 @@ terraform {
 
   # This is configured in the $env.backend file
   backend "s3" {
-    region = "us-east-1"
+    region = "ap-southeast-2"
   }
 }
 
 locals {
   default_tags = {
     managed_by = "org-kickstart"
-    tf_repo    = "CHANGEME"
+    tf_repo    = "cloudshuttle/org-kickstart"
   }
 }
 
 module "organization" {
 
   # Use the latest
-  source = "github.com/primeharbor/org-kickstart"
+  source = "github.com/cloudshuttle/org-kickstart"
 
   # Pin to a specific release
   # source = "github.com/primeharbor/org-kickstart?ref=v0.0.1"

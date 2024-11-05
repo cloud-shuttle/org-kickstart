@@ -18,6 +18,7 @@ endif
 
 include $(env).tfbackend
 
+export ENVIRONMENT=cloud-shuttle
 export DEPLOY_BUCKET=$(bucket)
 
 first-deploy: tf-init tf-execute
@@ -71,7 +72,7 @@ tf-plan-fetch:
 	@aws s3 cp s3://$(bucket)/$(env)-terraform.tfplan $(env)-terraform.tfplan
 	@aws s3 rm s3://$(bucket)/$(env)-terraform.tfplan
 
-tf-execute: tf-plan tf-apply
+tf-execute: tf-plan #tf-apply
 
 download-state:
 	@aws s3 cp s3://$(bucket)/$(key) $(env).tfstate
