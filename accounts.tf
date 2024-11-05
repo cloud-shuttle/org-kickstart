@@ -21,7 +21,11 @@
 module "accounts" {
   for_each = var.accounts
   source   = "./modules/account"
-
+  providers = {
+    aws.sydney = aws.sydney
+    aws = aws
+  }
+  
   account_name             = each.value["account_name"]
   account_email            = each.value["account_email"]
   parent_ou_id             = local.ou_name_to_id[lookup(each.value, "parent_ou_name", "Workloads")]

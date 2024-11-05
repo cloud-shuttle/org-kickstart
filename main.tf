@@ -17,6 +17,7 @@ terraform {
     aws = {
       source  = "hashicorp/aws"
       version = ">= 2.7.0"
+      configuration_aliases = [ aws, aws.sydney ]
     }
   }
 }
@@ -66,8 +67,16 @@ provider "aws" {
 }
 
 provider "aws" {
+  alias = "payer-ap-southeast-2"
+  region = "ap-southeast-2"
+  default_tags {
+    tags = local.default_tags
+  }
+}
+
+provider "aws" {
   alias  = "security-account"
-  region = "us-east-1"
+  region = "ap-southeast-2"
   assume_role {
     role_arn = "arn:aws:iam::${module.security_account.account_id}:role/OrganizationAccountAccessRole"
   }

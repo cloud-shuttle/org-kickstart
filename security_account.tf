@@ -25,7 +25,11 @@
 # We explictly create a security account.
 module "security_account" {
   source = "./modules/account"
-
+  providers = {
+      aws = aws
+      aws.sydney = aws.sydney
+  }
+  
   account_name             = var.security_account_name
   account_email            = var.security_account_root_email
   parent_ou_id             = aws_organizations_organizational_unit.governance_ou.id
